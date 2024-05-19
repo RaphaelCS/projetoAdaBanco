@@ -10,5 +10,5 @@ import java.math.BigDecimal;
 
 public interface Investir<T extends Cliente>{
 
-    ContaInvestimento investir(T cliente, ContaCorrente conta, BigDecimal valor) throws ValorInvalidoException, SaldoInsuficienteException;
+    ContaInvestimento investir(T cliente, ContaInvestimento conta, BigDecimal valor) throws ValorInvalidoException, SaldoInsuficienteException;
 }

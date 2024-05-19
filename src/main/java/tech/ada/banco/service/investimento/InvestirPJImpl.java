@@ -12,8 +12,16 @@ public interface InvestirPJImpl extends Investir<ClientePJ> {
     BigDecimal RENDIMENTO = BigDecimal.valueOf(0.02);
 
     @Override
-    default ContaInvestimento investir(ClientePJ cliente, ContaCorrente conta, BigDecimal valor) throws ValorInvalidoException, SaldoInsuficienteException {
-        return null;
+    default ContaInvestimento investir(ClientePJ cliente, ContaInvestimento conta, BigDecimal valor) throws ValorInvalidoException, SaldoInsuficienteException {
+        if(valor.compareTo(BigDecimal.ZERO)<1){
+            throw new ValorInvalidoException("Valor menor que zero ou igual a zero");
+        }
+        if(conta.getSaldo().compareTo(valor)<0) {
+            throw new SaldoInsuficienteException();
+        }
+
+        conta.setSaldo(conta.getSaldo().add(valor).add(valor.multiply(RENDIMENTO)));
+        return conta;
     }
 
 
