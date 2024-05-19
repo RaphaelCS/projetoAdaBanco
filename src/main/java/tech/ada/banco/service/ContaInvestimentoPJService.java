@@ -84,9 +84,9 @@ public class ContaInvestimentoPJService implements SaquePJImpl<ContaInvestimento
         return convertDto(conta);
     }
 
-    public void validarUsuario(String cpf, ContaDTO contaDTO){
+    public void validarUsuario(String cnpj, ContaDTO contaDTO){
         var conta = contaRepository.findByUuid(contaDTO.getUuid()).orElseThrow();
-        if(!((ClientePF)conta.getCliente()).getCpf().equals(cpf)) {
+        if(!((ClientePJ)conta.getCliente()).getCnpj().equals(cnpj)) {
             throw new AccessDeniedException("Apenas o dono da conta pode realizar esta operação.");
         }
     }

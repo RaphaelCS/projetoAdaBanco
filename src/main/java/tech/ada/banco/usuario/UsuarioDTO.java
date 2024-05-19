@@ -1,6 +1,7 @@
 package tech.ada.banco.usuario;
 
 import lombok.*;
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
@@ -18,8 +19,9 @@ public class UsuarioDTO {
     @Email(message = "email invalido")
     private String email;
     @CPF(message = "CPF inválido")
-    @NotBlank(message = "CPF obrigatório")
     private String cpf;
+    @CNPJ(message =  "CNPJ inválido")
+    private String cnpj;
     private String telefone;
     @NotBlank(message = "Username obrigatório")
     private String username;

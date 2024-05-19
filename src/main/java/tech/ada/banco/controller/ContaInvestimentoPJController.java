@@ -66,7 +66,7 @@ public class ContaInvestimentoPJController {
     @PreAuthorize("hasAnyRole(T(tech.ada.banco.usuario.Role).ADMIN.name(),T(tech.ada.banco.usuario.Role).CLIENTE.name())")
     public ResponseEntity<ContaDTO> sacar(@Valid @RequestBody ContaDTO contaDTO, @RequestHeader (name="Authorization") String bearerToken){
         try {
-          //  service.validarUsuario(obterCpfToken(bearerToken),contaDTO);
+            //service.validarUsuario(obterCnpjToken(bearerToken),contaDTO);
             return new ResponseEntity<>(service.sacar(contaDTO), HttpStatus.OK);
         } catch (SaldoInsuficienteException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -79,7 +79,7 @@ public class ContaInvestimentoPJController {
     @PreAuthorize("hasAnyRole(T(tech.ada.banco.usuario.Role).ADMIN.name(),T(tech.ada.banco.usuario.Role).CLIENTE.name())")
     public ResponseEntity<ContaDTO> investir(@Valid @RequestBody ContaDTO contaDTO, @RequestHeader (name="Authorization") String bearerToken){
         try {
-           // service.validarUsuario(obterCpfToken(bearerToken),contaDTO);
+        //    service.validarUsuario(obterCnpjToken(bearerToken),contaDTO);
             return new ResponseEntity<>(service.investir(contaDTO), HttpStatus.OK);
         } catch (SaldoInsuficienteException e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -88,10 +88,12 @@ public class ContaInvestimentoPJController {
         }
     }
 
-    private String obterCpfToken(String bearerToken){
+    //todo não está trazendo o cnpj
+    private String obterCnpjToken(String bearerToken){
         String token = bearerToken.substring(7);
         Usuario u = (Usuario) jwtService.getUserDetails(token);
-        return u.getCpf();
+        return u.getCnpj();
     }
+
 
 }

@@ -33,6 +33,7 @@ public class JwtService {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("roles",usuario.get().getRoles());
         claims.put("cpf",usuario.get().getCpf());
+        claims.put("cnpj",usuario.get().getCnpj());
         final var now = LocalDateTime.now();
         return Jwts.builder()
                 .setClaims(claims)
@@ -60,6 +61,7 @@ public class JwtService {
         String subject = (String) claims.get(Claims.SUBJECT);
         String roles = (String) claims.get("roles");
         String cpf = (String) claims.get("cpf");
+        String cnpj = (String) claims.get("cnpj");
 
         String[] jwtSubject = subject.split(",");
 
@@ -67,6 +69,7 @@ public class JwtService {
                 builder()
                 .roles(roles)
                 .cpf(cpf)
+                .cnpj(cnpj)
                 .username(jwtSubject[0])
                 .build();
     }
