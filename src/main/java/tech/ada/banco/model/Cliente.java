@@ -16,6 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true)
 @DiscriminatorColumn(name = "tipo_cliente" , discriminatorType = DiscriminatorType.INTEGER)
 @ToString
+//todo tive que tirar o abstract
 public /*abstract*/ class Cliente {
 
     @Id

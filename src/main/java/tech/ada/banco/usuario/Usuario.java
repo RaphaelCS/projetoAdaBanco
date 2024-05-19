@@ -1,16 +1,15 @@
 package tech.ada.banco.usuario;
 
-import tech.ada.banco.util.Pessoa;
 import lombok.*;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -20,11 +19,20 @@ import java.util.stream.Collectors;
 @Builder
 @Entity
 @Where(clause = "active = true")
-public class Usuario extends Pessoa implements UserDetails {
+public class Usuario implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    @Column(columnDefinition = "UUID", nullable = false)
+    private UUID uuid;
 
     private String email;
     @Column(unique = true)
     private String cpf;
+    @Column(unique = true)
+    private String cnpj;
     @Column(unique = true)
     private String username;
     private String password;

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class ContaCorrentePJService implements ConsultaSaldo<ContaCorrente>, Deposito<ContaCorrente>,
         SaquePJImpl<ContaCorrente>, TransferenciaPJImpl<ContaCorrente> {
 
-    private final ContaRepository contaRepository;
+    private final ContaRepository<ClientePJ, ContaCorrente> contaRepository;
     private final ClienteRepository<ClientePJ> clienteRepository;
     private final ModelMapper modelMapper;
 
@@ -45,14 +45,13 @@ public class ContaCorrentePJService implements ConsultaSaldo<ContaCorrente>, Dep
 
     public List<ContaDTO> listarContas(UUID clienteUuid){
         var cliente = clienteRepository.findByUuid(clienteUuid);
-      //  return contaRepository.findByCliente(cliente).stream().map(this::convertDto).collect(Collectors.toList());
-        return null;
+        return contaRepository.findByCliente(cliente).stream().map(this::convertDto).collect(Collectors.toList());
     }
 
     public ContaDTO salvar(ContaDTO contaDTO) throws NaoEncontradoException {
         var cliente = clienteRepository.findByUuid(contaDTO.getClienteUuid()).orElseThrow();
         var conta = convertFromDto(contaDTO);
-  //      conta.setCliente(cliente);
+        conta.setCliente(cliente);
         conta.setUuid(UUID.randomUUID());
         conta.setDataCriacao(LocalDate.now());
         return convertDto(contaRepository.save(conta));
@@ -73,7 +72,7 @@ public class ContaCorrentePJService implements ConsultaSaldo<ContaCorrente>, Dep
 
     public ContaDTO sacar(ContaDTO contaDTO) throws SaldoInsuficienteException, ValorInvalidoException {
         var conta = contaRepository.findByUuid(contaDTO.getUuid()).orElseThrow();
-  //      sacar((ClientePJ) conta.getCliente(), (ContaCorrente) conta, contaDTO.getValorOperacao());
+        sacar((ClientePJ) conta.getCliente(), (ContaCorrente) conta, contaDTO.getValorOperacao());
         return convertDto(contaRepository.save(conta));
     }
 
@@ -91,19 +90,17 @@ public class ContaCorrentePJService implements ConsultaSaldo<ContaCorrente>, Dep
     public ContaDTO transferir(ContaDTO contaDTO) throws SaldoInsuficienteException, ValorInvalidoException {
         var conta = contaRepository.findByUuid(contaDTO.getUuid()).orElseThrow();
         var contaDestino = contaRepository.findByUuid(contaDTO.getContaDestinoUuid()).orElseThrow();
-   //     transferir((ClientePJ) conta.getCliente(), (ContaCorrente) conta, contaDTO.getValorOperacao(), contaDestino);
+        transferir((ClientePJ) conta.getCliente(), (ContaCorrente) conta, contaDTO.getValorOperacao(), contaDestino);
         contaRepository.save(conta);
         contaRepository.save(contaDestino);
         return convertDto(conta);
     }
 
-    public void validarUsuario(String cpf, ContaDTO contaDTO){
-        /*
+    public void validarUsuario(String cnpj, ContaDTO contaDTO){
         var conta = contaRepository.findByUuid(contaDTO.getUuid()).orElseThrow();
-        if(!conta.getCliente().getCpf().equals(cpf)) {
+        if(!((ClientePJ)conta.getCliente()).getCnpj().equals(cnpj)) {
             throw new AccessDeniedException("Apenas o dono da conta pode realizar esta operação.");
         }
 
-         */
     }
 }

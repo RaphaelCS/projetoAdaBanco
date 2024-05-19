@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class ContaCorrentePFService implements ConsultaSaldo<ContaCorrente>, Deposito<ContaCorrente>,
         SaquePFImpl<ContaCorrente>, TransferenciaPFImpl<ContaCorrente> {
 
-    private final ContaRepository contaRepository;
+    private final ContaRepository<ClientePF, ContaCorrente> contaRepository;
     private final ClienteRepository<ClientePF> clienteRepository;
     private final ModelMapper modelMapper;
 

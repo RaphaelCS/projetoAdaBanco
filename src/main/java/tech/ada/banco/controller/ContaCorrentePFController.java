@@ -1,7 +1,6 @@
 package tech.ada.banco.controller;
 
 import tech.ada.banco.dto.ContaDTO;
-import tech.ada.banco.enums.StatusEnum;
 import tech.ada.banco.exception.NaoEncontradoException;
 import tech.ada.banco.exception.SaldoExistenteException;
 import tech.ada.banco.exception.SaldoInsuficienteException;
@@ -22,9 +21,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/contas")
+@RequestMapping("/clientesPF/contaCorrente")
 @RequiredArgsConstructor
-public class ContaController {
+public class ContaCorrentePFController {
 
     private final ContaCorrentePFService service;
     private final ModelMapper modelMapper;
