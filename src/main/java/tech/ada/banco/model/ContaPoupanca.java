@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 public class ContaPoupanca extends Conta {
+    @Override
+    public Conta clone() {
+        return null;
+    }
 
 /*
     public ContaPoupanca(ClientePF cliente) {

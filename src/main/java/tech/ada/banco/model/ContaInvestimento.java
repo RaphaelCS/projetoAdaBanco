@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 public class ContaInvestimento extends Conta {
+    @Override
+    public Conta clone() {
+        return null;
+    }
 /*
     public ContaInvestimento(Cliente cliente)  {
         super(cliente);

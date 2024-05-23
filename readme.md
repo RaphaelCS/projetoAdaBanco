@@ -24,6 +24,25 @@ Classe possibilita a inclusão de novas implementações sem precisar alterar o 
 
 ## Builder
 Classe: src/main/java/tech/ada/banco/login/JwtService.java  
-Linha: 68   
-Classe usuario possibilita a inclusão de atributos um a um para construir o objeto. 
+Linha: 68
+
+Classe: src/main/java/tech/ada/banco/designPartner/ClientePFBuilder.java 
+Linha: 71
+
+Padrão que possibilita a inclusão de atributos um a um para construir o objeto. 
+
+## Bridge
+Classe: src/main/java/tech/ada/banco/designPartner/ExemploBridge.java 
+Linha: 104   
+Padrão que possibilita o uso de comportamentos independente da implamentação escolhida.  
+
+## Singleton
+Classe: src/main/java/tech/ada/banco/designPartner/ExemploSigleton.java
+Linha: 7   
+Padrão que garante que exista apenas um objeto do tipo, provendo um acesso global a instância.
+
+## Prototype
+Classe: src/main/java/tech/ada/banco/designPartner/ExemploPrototype.java
+Linha: 13
+Padrão de projeto criacional que permite copiar objetos existentes sem fazer seu código ficar dependente de suas classes.
 

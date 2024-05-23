@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ContaCorrentePJService implements ConsultaSaldo<ContaCorrente>, Deposito<ContaCorrente>,
-        SaquePJImpl<ContaCorrente>, TransferenciaPJImpl<ContaCorrente> {
+        SaquePJImpl<ContaCorrente>, TransferenciaPJImpl<ContaCorrente>, ContaServiceInterface {
 
     private final ContaRepository<ClientePJ, ContaCorrente> contaRepository;
     private final ClienteRepository<ClientePJ> clienteRepository;

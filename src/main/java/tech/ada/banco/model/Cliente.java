@@ -9,13 +9,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@NoArgsConstructor(force = true)
 @DiscriminatorColumn(name = "tipo_cliente" , discriminatorType = DiscriminatorType.INTEGER)
-@ToString
 //todo tive que tirar o abstract
 public /*abstract*/ class Cliente {
 

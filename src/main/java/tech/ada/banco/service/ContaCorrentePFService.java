@@ -1,5 +1,6 @@
 package tech.ada.banco.service;
 
+import lombok.NoArgsConstructor;
 import tech.ada.banco.dto.ContaDTO;
 import tech.ada.banco.exception.NaoEncontradoException;
 import tech.ada.banco.exception.SaldoExistenteException;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ContaCorrentePFService implements ConsultaSaldo<ContaCorrente>, Deposito<ContaCorrente>,
-        SaquePFImpl<ContaCorrente>, TransferenciaPFImpl<ContaCorrente> {
+        SaquePFImpl<ContaCorrente>, TransferenciaPFImpl<ContaCorrente>, ContaServiceInterface {
 
     private final ContaRepository<ClientePF, ContaCorrente> contaRepository;
     private final ClienteRepository<ClientePF> clienteRepository;

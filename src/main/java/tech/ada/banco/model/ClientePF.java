@@ -1,10 +1,8 @@
 package tech.ada.banco.model;
 
+import lombok.*;
+import tech.ada.banco.designPartner.ClientePFBuilder;
 import tech.ada.banco.enums.StatusEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,9 +10,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor(force = true)
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("1")
 public class ClientePF extends Cliente{
@@ -40,5 +37,8 @@ public class ClientePF extends Cliente{
     public int hashCode() {
         return Objects.hash(cpf);
     }
-    
+
+    public static ClientePFBuilder builder(){
+        return new ClientePFBuilder();
+    }
 }

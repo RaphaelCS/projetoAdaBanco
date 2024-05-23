@@ -1,10 +1,7 @@
 package tech.ada.banco.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -17,6 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 @DiscriminatorValue("2")
+@Builder
 public class ClientePJ extends Cliente{
 
     @Column(unique = true)
